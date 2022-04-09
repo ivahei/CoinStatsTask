@@ -19,21 +19,23 @@ final class MainTableViewCell: UITableViewCell {
     @IBOutlet private var descriptionLabel: UILabel!
     @IBOutlet private var dateLabel: UILabel!
     @IBOutlet private var contentImageView: UIImageView!
-    @IBOutlet private var isRedImageView: UIImageView!
+    @IBOutlet private var isReadImageView: UIImageView!
 
     // MARK: - Populate Cell
 
-    func populate(with model: Article) {
-        titleLabel.text = model.title
-        descriptionLabel.text = model.category
-        dateLabel.text = model.date.formatted(date: .omitted, time: .shortened)
-        checkIsRed(model.isRed)
+    func populate(with article: Article) {
+        titleLabel.text = article.title
+        descriptionLabel.text = article.category
+        let dateformatter = DateFormatter()
+        dateformatter.dateFormat = "dd/MM/YY HH:mm"
+        dateLabel.text = dateformatter.string(from: article.date)
+        checkIsRead(article.isRead)
         guard let placeholderImage = UIImage(systemName: "photo.artframe") else {
             return assertionFailure()
         }
         contentImageView.kf.indicatorType = .activity
         contentImageView.kf.setImage(
-            with: model.coverPhotoUrl,
+            with: article.coverPhotoUrl,
             placeholder: placeholderImage,
             options: [
                 .transition(.fade(1)),
@@ -48,13 +50,13 @@ final class MainTableViewCell: UITableViewCell {
             }
     }
 
-    private func checkIsRed(_ isRed: Bool?) {
-        if isRed == true {
-            isRedImageView.image = UIImage(systemName: "checkmark.circle.fill")
-            isRedImageView.tintColor = .blue
+    private func checkIsRead(_ isRead: Bool?) {
+        if isRead == true {
+            isReadImageView.image = UIImage(systemName: "checkmark.circle.fill")
+            isReadImageView.tintColor = .blue
         } else {
-            isRedImageView.image = UIImage(systemName: "checkmark.circle")
-            isRedImageView.tintColor = .gray
+            isReadImageView.image = UIImage(systemName: "checkmark.circle")
+            isReadImageView.tintColor = .gray
         }
     }
 }

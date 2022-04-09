@@ -12,57 +12,55 @@ import ReadMoreTextView
 
 final class DetailViewController: UIViewController {
 
-    // MARK: - initialisation
+    // MARK: - Subviews
 
-    init?(coder: NSCoder, article: Article) {
-        self.article = article
-        super.init(coder: coder)
-    }
+    @IBOutlet private var mainImageView: UIImageView!
+    @IBOutlet private var titleLabel: UILabel!
+    @IBOutlet private var dateLabel: UILabel!
+    @IBOutlet private var bodyTextView: ReadMoreTextView!
+    @IBOutlet private var showGalleryButton: UIButton!
 
-    required init?(coder: NSCoder) {
-        fatalError("Cant be initialized")
-    }
-
-    enum Section {
-        case main
-    }
-
-    var article: Article
-
-    // MARK: - SubViews
-
-    @IBOutlet private var mainImageView: UIImageView! { didSet {
-        mainImageView.kf.setImage(with: article.coverPhotoUrl)
-    }}
-
-    @IBOutlet private var titleLabel: UILabel! { didSet {
-        titleLabel.text = article.title
-    }}
-
-    @IBOutlet private var dateLabel: UILabel! { didSet {
-        dateLabel.text = article.date.formatted(date: .omitted, time: .shortened)
-    }}
-
-    @IBOutlet private var bodyTextView: ReadMoreTextView! { didSet {
-        bodyTextView.attributedText = article.body.htmlToAttributedString
-    }}
-
-    @IBOutlet private var bodyTextViewHeightConstraint: NSLayoutConstraint!
-
-    // MARK: - Lifecycle Methods
+    // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationItem.title = article.category
-        bodyTextView.delegate = self
+        if let article = article {
+            configure(with: article)
+        }
+    }
+
+    private func configure(with article: Article) {
+        mainImageView.kf.setImage(with: article.coverPhotoUrl)
+        titleLabel.text = article.title
+        let dateformatter = DateFormatter()
+        dateformatter.dateFormat = "dd/MM/YY HH:mm"
+        dateLabel.text = dateformatter.string(from: article.date)
+        bodyTextView.text = article.body.htmlToString
+        navigationItem.title = article.category
+
+        if article.gallery == nil {
+            showGalleryButton.alpha = 0
+        } else {
+            showGalleryButton.alpha = 1
+        }
+    }
+
+    // MARK: - Injection
+
+    var article: Article?
+
+    // MARK: - Callbacks
+
+    @IBAction func showGalleryAction(_ sender: UIButton) {
+        print("tap")
     }
 }
 
 // MARK: - String extension
 
 private extension String {
-    var htmlToAttributedString: NSAttributedString? {
+    private var htmlToAttributedString: NSAttributedString? {
         guard let data = data(using: .utf8) else { return nil }
         do {
             return try NSAttributedString(
@@ -80,13 +78,5 @@ private extension String {
 
     var htmlToString: String {
         return htmlToAttributedString?.string ?? ""
-    }
-}
-
-// MARK: - TextView Delegate
-
-extension DetailViewController: UITextViewDelegate {
-    func textViewDidChange(_ textView: UITextView) {
-        bodyTextViewHeightConstraint.constant = bodyTextView.contentSize.height
     }
 }

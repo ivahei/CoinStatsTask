@@ -16,9 +16,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         willConnectTo session: UISceneSession,
         options connectionOptions: UIScene.ConnectionOptions
     ) {
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard (scene as? UIWindowScene) != nil else { return }
+
+        if let splitViewController = window?.rootViewController as? UISplitViewController {
+            splitViewController.delegate = UIApplication.shared.delegate as? AppDelegate
+        }
     }
-    
+
     func sceneDidDisconnect(_ scene: UIScene) {
     }
 

@@ -16,25 +16,42 @@ final class NetworkController {
 
     enum ItemError: Error, LocalizedError {
         case urlNotFound
-        case itemsNotFound
+        case responseError
+        case dataError
     }
-
-    let baseURL = URL(string: "https://coinstats.getsandbox.com/feed")
 
     // MARK: - Fetch Items
 
-    func fetchItems() async throws -> [Article] {
+    func fetchItems(_ completion: @escaping (Result<[Article], Error>) -> Void) {
+        let baseURL = URL(string: "https://coinstats.getsandbox.com/feed")
+        guard let url = baseURL else { return completion(.failure(ItemError.urlNotFound)) }
 
-        guard let baseURL = baseURL else { throw ItemError.urlNotFound }
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            guard
+                let httpResponse = response as? HTTPURLResponse,
+                (200..<300).contains(httpResponse.statusCode)
+            else {
+                completion(.failure(ItemError.responseError))
+                return
+            }
 
-        let (data, response) = try await URLSession.shared.data(from: baseURL)
+            guard let data = data else {
+                completion(.failure(ItemError.dataError))
+                return
+            }
 
-        guard let httpResponse = response as? HTTPURLResponse, (200..<300).contains(httpResponse.statusCode)
-        else { throw ItemError.itemsNotFound }
-
-        let decoder = JSONDecoder()
-        let searchResponse = try decoder.decode(ArticleResponse.self, from: data)
-
-        return searchResponse.data
+            do {
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .secondsSince1970
+                let responseData = try decoder.decode(ArticleResponse.self, from: data)
+                completion(.success(responseData.data))
+            } catch {
+                completion(.failure(error))
+            }
+        }.resume()
     }
 }

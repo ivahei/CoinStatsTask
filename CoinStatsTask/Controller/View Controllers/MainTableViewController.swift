@@ -12,72 +12,67 @@ import RealmSwift
 final class MainTableViewController: UITableViewController {
 
     let networkController = NetworkController.shared
-    var articles: [Article]?
-    var selectedArticle: Article!
-    var selectedImage: UIImage!
 
-//    let realm = try? Realm()
+    var articles: [Article] = []
 
-    // MARK: - Lifecycle Methods
+    // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        Task {
-            do {
-                articles = try await networkController.fetchItems()
-                tableView.reloadData()
-            } catch {
-                print(error)
-            }
+        tableView.reloadData()
+
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            let indexPath = IndexPath(row: 0, section: 0)
+            tableView.selectRow(at: indexPath, animated: false, scrollPosition: .top)
+            showSplitViewDetails(for: indexPath)
         }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        Task { tableView.reloadData() }
+
+        tableView.reloadData()
     }
 }
 
-// MARK: - Table view methods
+// MARK: - TableView
 
 extension MainTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return articles?.count ?? 0
+        return articles.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard
-            let cell = tableView.dequeueReusableCell(
+        guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: "MainCell",
                 for: indexPath
             ) as? MainTableViewCell else { fatalError() }
 
-        if let model = articles {
-            cell.populate(with: model[indexPath.row])
-        }
+        cell.populate(with: articles[indexPath.row])
         return cell
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        articles?[indexPath.row].isRed = true
-        selectedArticle = articles?[indexPath.row]
-        performSegue(withIdentifier: "presentDetailVC", sender: self)
+        articles[indexPath.row].isRead = true
+
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            let currentIndexPath = IndexPath(row: indexPath.row, section: 0)
+            tableView.reloadRows(at: [currentIndexPath], with: .none)
+        }
+
+        showSplitViewDetails(for: indexPath)
     }
-}
 
-// MARK: - Segway Actions
+    private func showSplitViewDetails(for indexPath: IndexPath) {
+        guard let detailsViewController = storyboard?
+            .instantiateViewController(
+                withIdentifier: "DetailViewController"
+            ) as?
+                DetailViewController
+        else { fatalError() }
 
-extension MainTableViewController {
-    @IBSegueAction
-    func presentDetailVC(
-        _ coder: NSCoder,
-        sender: Any?,
-        segueIdentifier: String?
-    ) -> DetailViewController? {
-        DetailViewController(
-            coder: coder,
-            article: selectedArticle
-        )
+        detailsViewController.article = articles[indexPath.row]
+        splitViewController?.showDetailViewController(detailsViewController, sender: self)
     }
 }

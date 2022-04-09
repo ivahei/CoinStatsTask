@@ -15,5 +15,5 @@ class ArticleRealm: Object {
     @Persisted var date: Date = Date()
     @Persisted var coverPhotoUrl: String = ""
     @Persisted var body: String = ""
-    @Persisted var isRed: Bool = false
+    @Persisted var isRead: Bool = false
 }

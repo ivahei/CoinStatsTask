@@ -15,16 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
-    ) -> Bool {
-
-        do {
-            let realm = try Realm()
-        } catch {
-            print("Error initialising new realm, \(error)")
-        }
-
-        return true
-    }
+    ) -> Bool { true }
 
     // MARK: UISceneSession Lifecycle
 
@@ -38,4 +29,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
     }
+}
+
+extension AppDelegate: UISplitViewControllerDelegate {
+    func splitViewController(
+        _ splitViewController: UISplitViewController,
+        collapseSecondary secondaryViewController: UIViewController,
+        onto primaryViewController: UIViewController
+    ) -> Bool { true }
 }

@@ -18,10 +18,11 @@ struct Article: Decodable {
     var coverPhotoUrl: URL
     var body: String
     var gallery: [Gallery]?
-    var isRed: Bool?
+    var isRead: Bool?
 }
 
 struct Gallery: Decodable {
     var title: String
     var contentUrl: URL
+    var thumbnailUrl: URL
 }
