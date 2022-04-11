@@ -12,17 +12,18 @@ struct ArticleResponse: Decodable {
 }
 
 struct Article: Decodable {
+    var id: String?
     var title: String
     var category: String
     var date: Date
-    var coverPhotoUrl: URL
+    var coverPhotoUrl: String
     var body: String
     var gallery: [Gallery]?
     var isRead: Bool?
 }
 
-struct Gallery: Decodable {
+struct Gallery: Decodable, Hashable {
     var title: String
-    var contentUrl: URL
-    var thumbnailUrl: URL
+    var contentUrl: String
+    var thumbnailUrl: String
 }

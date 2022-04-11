@@ -31,7 +31,11 @@ final class DetailViewController: UIViewController {
     }
 
     private func configure(with article: Article) {
-        mainImageView.kf.setImage(with: article.coverPhotoUrl)
+        if let url = URL(string: article.coverPhotoUrl) {
+            mainImageView.kf.setImage(with: url)
+        } else {
+            mainImageView.image = UIImage(systemName: "person.cyrcle")
+        }
         titleLabel.text = article.title
         let dateformatter = DateFormatter()
         dateformatter.dateFormat = "dd/MM/YY HH:mm"
@@ -39,10 +43,16 @@ final class DetailViewController: UIViewController {
         bodyTextView.text = article.body.htmlToString
         navigationItem.title = article.category
 
-        if article.gallery == nil {
-            showGalleryButton.alpha = 0
-        } else {
-            showGalleryButton.alpha = 1
+        setGalleryButtonAlpha(article.gallery)
+    }
+
+    private func setGalleryButtonAlpha(_ gallery: [Gallery]?) {
+        if let gallery = gallery {
+            if gallery.isEmpty {
+                showGalleryButton.alpha = 0
+            } else {
+                showGalleryButton.alpha = 1
+            }
         }
     }
 
@@ -53,7 +63,25 @@ final class DetailViewController: UIViewController {
     // MARK: - Callbacks
 
     @IBAction func showGalleryAction(_ sender: UIButton) {
-        print("tap")
+        performSegue(
+            withIdentifier: "presentGalleryCollectionViewController",
+            sender: self
+        )
+    }
+
+    // MARK: - SegueAction
+
+    @IBSegueAction func presentGalleryCollectionViewController(
+        _ coder: NSCoder,
+        sender: Any?,
+        segueIdentifier: String?
+    ) -> GalleryCollectionViewController? {
+        guard
+            let article = article,
+            let galleryItem = article.gallery
+        else { fatalError() }
+
+        return GalleryCollectionViewController(coder: coder, galleryItem: galleryItem)
     }
 }
 

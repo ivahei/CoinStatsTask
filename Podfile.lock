@@ -1,16 +1,20 @@
 PODS:
   - ReadMoreTextView (3.0.1)
+  - SwiftPhotoGallery (3.4.1)
 
 DEPENDENCIES:
   - ReadMoreTextView
+  - SwiftPhotoGallery
 
 SPEC REPOS:
   trunk:
     - ReadMoreTextView
+    - SwiftPhotoGallery
 
 SPEC CHECKSUMS:
   ReadMoreTextView: 19147adf93abce6d7271e14031a00303fe28720d
+  SwiftPhotoGallery: 795b79e2596beb160fb978e232603da0811006ce
 
-PODFILE CHECKSUM: 7689ac62b7492a14831e5711184c3c5818bc2f52
+PODFILE CHECKSUM: f53b549736e30558ceaa13834af85cca5823eff6
 
 COCOAPODS: 1.11.2

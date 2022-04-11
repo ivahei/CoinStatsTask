@@ -33,21 +33,25 @@ final class MainTableViewCell: UITableViewCell {
         guard let placeholderImage = UIImage(systemName: "photo.artframe") else {
             return assertionFailure()
         }
-        contentImageView.kf.indicatorType = .activity
-        contentImageView.kf.setImage(
-            with: article.coverPhotoUrl,
-            placeholder: placeholderImage,
-            options: [
-                .transition(.fade(1)),
-                .cacheOriginalImage
-            ]) { result in
-                switch result {
-                case .success(let value):
-                    print("Task done for: \(value.source.url?.absoluteString ?? "")")
-                case .failure(let error):
-                    print(error.localizedDescription)
+        if let url = URL(string: article.coverPhotoUrl) {
+            contentImageView.kf.indicatorType = .activity
+            contentImageView.kf.setImage(
+                with: url,
+                placeholder: placeholderImage,
+                options: [
+                    .transition(.fade(1)),
+                    .cacheOriginalImage
+                ]) { result in
+                    switch result {
+                    case .success(let value):
+                        print("Task done for: \(value.source.url?.absoluteString ?? "")")
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
                 }
-            }
+        } else {
+            contentImageView.image = placeholderImage
+        }
     }
 
     private func checkIsRead(_ isRead: Bool?) {

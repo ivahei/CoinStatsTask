@@ -16,6 +16,9 @@
 		7939977227FF2E660024A4CF /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7939977127FF2E660024A4CF /* DetailViewController.swift */; };
 		7939977527FF2F350024A4CF /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 7939977427FF2F350024A4CF /* Realm */; };
 		7939977727FF2F350024A4CF /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7939977627FF2F350024A4CF /* RealmSwift */; };
+		79A9002F2803741C00198F5D /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A9002E2803741C00198F5D /* Endpoints.swift */; };
+		79A900332803879C00198F5D /* UIStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A900322803879C00198F5D /* UIStoryboard.swift */; };
+		79A900352803881F00198F5D /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A900342803881F00198F5D /* UIViewController.swift */; };
 		79DA8A9E27FDC71800D56B57 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DA8A9D27FDC71800D56B57 /* AppDelegate.swift */; };
 		79DA8AA027FDC71800D56B57 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DA8A9F27FDC71800D56B57 /* SceneDelegate.swift */; };
 		79DA8AA527FDC71800D56B57 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79DA8AA327FDC71800D56B57 /* Main.storyboard */; };
@@ -26,6 +29,9 @@
 		79DA8AC127FDC71A00D56B57 /* CoinStatsTaskUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DA8AC027FDC71A00D56B57 /* CoinStatsTaskUITestsLaunchTests.swift */; };
 		79E3A0AB2800450E0006FD0F /* ArticleRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E3A0AA2800450E0006FD0F /* ArticleRealm.swift */; };
 		79E3A0AD2801AC920006FD0F /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E3A0AC2801AC920006FD0F /* LaunchViewController.swift */; };
+		79EB058C28021ED200812689 /* GalleryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EB058B28021ED200812689 /* GalleryCollectionViewController.swift */; };
+		79EB058E280220ED00812689 /* GalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EB058D280220ED00812689 /* GalleryCollectionViewCell.swift */; };
+		79EB059028025C8C00812689 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EB058F28025C8C00812689 /* PersistenceController.swift */; };
 		8F55B2B42FA1B3B6D6F02249 /* Pods_CoinStatsTask_CoinStatsTaskUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED92F7E0736294486DEEBAE1 /* Pods_CoinStatsTask_CoinStatsTaskUITests.framework */; };
 		B3A628CEDA615ACA0110CC29 /* Pods_CoinStatsTask.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90A3B4E8088C8A3B93840125 /* Pods_CoinStatsTask.framework */; };
 /* End PBXBuildFile section */
@@ -56,6 +62,9 @@
 		7939976827FF01BB0024A4CF /* MainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
 		7939976C27FF036F0024A4CF /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
 		7939977127FF2E660024A4CF /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		79A9002E2803741C00198F5D /* Endpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
+		79A900322803879C00198F5D /* UIStoryboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStoryboard.swift; sourceTree = "<group>"; };
+		79A900342803881F00198F5D /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		79DA8A9A27FDC71800D56B57 /* CoinStatsTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoinStatsTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79DA8A9D27FDC71800D56B57 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		79DA8A9F27FDC71800D56B57 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,6 +79,9 @@
 		79DA8AC027FDC71A00D56B57 /* CoinStatsTaskUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinStatsTaskUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		79E3A0AA2800450E0006FD0F /* ArticleRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleRealm.swift; sourceTree = "<group>"; };
 		79E3A0AC2801AC920006FD0F /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
+		79EB058B28021ED200812689 /* GalleryCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCollectionViewController.swift; sourceTree = "<group>"; };
+		79EB058D280220ED00812689 /* GalleryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCollectionViewCell.swift; sourceTree = "<group>"; };
+		79EB058F28025C8C00812689 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		83DDB2EC79E053919867BCC0 /* Pods-CoinStatsTask.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoinStatsTask.release.xcconfig"; path = "Target Support Files/Pods-CoinStatsTask/Pods-CoinStatsTask.release.xcconfig"; sourceTree = "<group>"; };
 		90A3B4E8088C8A3B93840125 /* Pods_CoinStatsTask.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoinStatsTask.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9846E8BD0D0FFD5D01D50CE1 /* Pods-CoinStatsTaskTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoinStatsTaskTests.debug.xcconfig"; path = "Target Support Files/Pods-CoinStatsTaskTests/Pods-CoinStatsTaskTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -123,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				7939976527FEF6470024A4CF /* NetworkController.swift */,
+				79EB058F28025C8C00812689 /* PersistenceController.swift */,
 			);
 			path = "Network Controllers";
 			sourceTree = "<group>";
@@ -133,6 +146,7 @@
 				79E3A0AC2801AC920006FD0F /* LaunchViewController.swift */,
 				7939976827FF01BB0024A4CF /* MainTableViewController.swift */,
 				7939977127FF2E660024A4CF /* DetailViewController.swift */,
+				79EB058B28021ED200812689 /* GalleryCollectionViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -141,8 +155,26 @@
 			isa = PBXGroup;
 			children = (
 				7939976C27FF036F0024A4CF /* MainTableViewCell.swift */,
+				79EB058D280220ED00812689 /* GalleryCollectionViewCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		79A90030280386F000198F5D /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				79A9002E2803741C00198F5D /* Endpoints.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		79A900312803870E00198F5D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				79A900322803879C00198F5D /* UIStoryboard.swift */,
+				79A900342803881F00198F5D /* UIViewController.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		79DA8A9127FDC71700D56B57 = {
@@ -175,6 +207,7 @@
 				79DA8ACE27FEE81900D56B57 /* Model */,
 				79DA8ACD27FEE7F700D56B57 /* View */,
 				79DA8ACF27FEE82D00D56B57 /* Controller */,
+				79A900312803870E00198F5D /* Extensions */,
 				79DA8AA627FDC71900D56B57 /* Assets.xcassets */,
 				79DA8AAB27FDC71900D56B57 /* Info.plist */,
 			);
@@ -210,6 +243,7 @@
 		79DA8ACE27FEE81900D56B57 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				79A90030280386F000198F5D /* Networking */,
 				7939976327FEF4710024A4CF /* Article.swift */,
 				79E3A0AA2800450E0006FD0F /* ArticleRealm.swift */,
 			);
@@ -339,8 +373,8 @@
 			);
 			mainGroup = 79DA8A9127FDC71700D56B57;
 			packageReferences = (
-				7939976E27FF0B9E0024A4CF /* XCRemoteSwiftPackageReference "Kingfisher.git" */,
-				7939977327FF2F350024A4CF /* XCRemoteSwiftPackageReference "realm-swift.git" */,
+				7939976E27FF0B9E0024A4CF /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				7939977327FF2F350024A4CF /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 79DA8A9B27FDC71800D56B57 /* Products */;
 			projectDirPath = "";
@@ -507,13 +541,19 @@
 			files = (
 				7939976627FEF6470024A4CF /* NetworkController.swift in Sources */,
 				79E3A0AD2801AC920006FD0F /* LaunchViewController.swift in Sources */,
+				79A9002F2803741C00198F5D /* Endpoints.swift in Sources */,
 				79DA8A9E27FDC71800D56B57 /* AppDelegate.swift in Sources */,
+				79EB059028025C8C00812689 /* PersistenceController.swift in Sources */,
 				79E3A0AB2800450E0006FD0F /* ArticleRealm.swift in Sources */,
+				79A900332803879C00198F5D /* UIStoryboard.swift in Sources */,
 				79DA8AA027FDC71800D56B57 /* SceneDelegate.swift in Sources */,
+				79EB058C28021ED200812689 /* GalleryCollectionViewController.swift in Sources */,
 				7939976927FF01BB0024A4CF /* MainTableViewController.swift in Sources */,
 				7939976D27FF036F0024A4CF /* MainTableViewCell.swift in Sources */,
+				79EB058E280220ED00812689 /* GalleryCollectionViewCell.swift in Sources */,
 				7939976427FEF4710024A4CF /* Article.swift in Sources */,
 				7939977227FF2E660024A4CF /* DetailViewController.swift in Sources */,
+				79A900352803881F00198F5D /* UIViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -865,7 +905,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		7939976E27FF0B9E0024A4CF /* XCRemoteSwiftPackageReference "Kingfisher.git" */ = {
+		7939976E27FF0B9E0024A4CF /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
 			requirement = {
@@ -873,7 +913,7 @@
 				minimumVersion = 7.2.0;
 			};
 		};
-		7939977327FF2F350024A4CF /* XCRemoteSwiftPackageReference "realm-swift.git" */ = {
+		7939977327FF2F350024A4CF /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
 			requirement = {
@@ -886,17 +926,17 @@
 /* Begin XCSwiftPackageProductDependency section */
 		7939976F27FF0B9E0024A4CF /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 7939976E27FF0B9E0024A4CF /* XCRemoteSwiftPackageReference "Kingfisher.git" */;
+			package = 7939976E27FF0B9E0024A4CF /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
 		};
 		7939977427FF2F350024A4CF /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 7939977327FF2F350024A4CF /* XCRemoteSwiftPackageReference "realm-swift.git" */;
+			package = 7939977327FF2F350024A4CF /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = Realm;
 		};
 		7939977627FF2F350024A4CF /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 7939977327FF2F350024A4CF /* XCRemoteSwiftPackageReference "realm-swift.git" */;
+			package = 7939977327FF2F350024A4CF /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */

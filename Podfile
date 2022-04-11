@@ -6,7 +6,8 @@ target 'CoinStatsTask' do
   use_frameworks!
 
   # Pods for CoinStatsTask
-  pod 'ReadMoreTextView'
+	pod 'ReadMoreTextView'
+	pod 'SwiftPhotoGallery'
 
   target 'CoinStatsTaskTests' do
     inherit! :search_paths

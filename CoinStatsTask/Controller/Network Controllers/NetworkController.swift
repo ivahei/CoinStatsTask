@@ -23,8 +23,7 @@ final class NetworkController {
     // MARK: - Fetch Items
 
     func fetchItems(_ completion: @escaping (Result<[Article], Error>) -> Void) {
-        let baseURL = URL(string: "https://coinstats.getsandbox.com/feed")
-        guard let url = baseURL else { return completion(.failure(ItemError.urlNotFound)) }
+        guard let url = URL(string: Endpoints.feed) else { return completion(.failure(ItemError.urlNotFound)) }
 
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
