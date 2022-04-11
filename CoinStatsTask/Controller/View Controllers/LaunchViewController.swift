@@ -22,19 +22,18 @@ class LaunchViewController: UIViewController {
 
     private func fetchArticles() {
         let articles = persistenceController.readArticles()
-        if articles.isEmpty {
-            networkController.fetchItems { [weak self] result in
-                guard let self = self else { fatalError() }
+        networkController.fetchItems { [weak self] result in
+            guard let self = self else { fatalError() }
 
-                switch result {
-                case .success(let articles):
+            switch result {
+            case .success(let articles):
+                self.sendArticlesToMainVC(articles)
+            case .failure(let error):
+                if !self.articles.isEmpty {
                     self.sendArticlesToMainVC(articles)
-                case .failure(let error):
-                    print(error.localizedDescription)
                 }
+                print(error.localizedDescription)
             }
-        } else {
-            sendArticlesToMainVC(articles)
         }
     }
 

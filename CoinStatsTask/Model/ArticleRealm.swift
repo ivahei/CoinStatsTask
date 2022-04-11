@@ -23,9 +23,3 @@ class ArticleRealm: Object {
             return "id"
         }
 }
-
-class GalleryRealm: Object {
-    @Persisted var title: String = ""
-    @Persisted var contentUrl: String = ""
-    @Persisted var thumbnailUrl: String = ""
-}

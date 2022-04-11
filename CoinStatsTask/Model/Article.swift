@@ -21,9 +21,3 @@ struct Article: Decodable {
     var gallery: [Gallery]?
     var isRead: Bool?
 }
-
-struct Gallery: Decodable, Hashable {
-    var title: String
-    var contentUrl: String
-    var thumbnailUrl: String
-}
