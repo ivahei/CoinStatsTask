@@ -18,7 +18,7 @@ final class PersistenceController {
 
     let networkController = NetworkController.shared
 
-    func writeInRealm(_ articles: [Article]) {
+    func writeInRealm(_ articles: [Article], modify: Bool) {
         do {
             let realm = try Realm()
             try realm.write {
@@ -44,7 +44,11 @@ final class PersistenceController {
                     articleRealm.isRead = $0.isRead ?? false
                     articleRealm.gallery = galleryRealm
 
-                    realm.add(articleRealm, update: .modified)
+                    if modify {
+                        realm.add(articleRealm, update: .modified)
+                    } else {
+                        realm.add(articleRealm, update: .modified)
+                    }
                 }
             }
         } catch {

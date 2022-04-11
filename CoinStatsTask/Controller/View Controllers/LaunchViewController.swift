@@ -29,7 +29,6 @@ class LaunchViewController: UIViewController {
             }
             switch result {
             case .success(let articles):
-                self.persistenceController.writeInRealm(articles)
                 DispatchQueue.main.async {
                     guard
                         let splitViewController = UIStoryboard.main
@@ -42,6 +41,7 @@ class LaunchViewController: UIViewController {
                             .visibleViewController as? MainTableViewController
                     else { fatalError("Initialization issue") }
 
+                    self.persistenceController.writeInRealm(articles, modify: false)
                     mainTableViewController.articles = self.persistenceController.readArticles()
                 }
             case .failure(let error):

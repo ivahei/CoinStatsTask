@@ -43,7 +43,7 @@ final class MainTableViewController: UITableViewController {
                     tableView.reloadData()
                 case .update(_, let deletions, let insertions, let modifications):
                     tableView.performBatchUpdates({
-                        tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}),
+                        tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0) }),
                                              with: .automatic)
                         tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),
                                              with: .automatic)
@@ -77,7 +77,7 @@ extension MainTableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         articles[indexPath.row].isRead = true
-        persistenceController.writeInRealm(articles)
+        persistenceController.writeInRealm(articles, modify: true)
         showSplitViewDetails(for: indexPath)
     }
 
