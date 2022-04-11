@@ -11,47 +11,12 @@ import RealmSwift
 
 final class PersistenceController {
 
+    // MARK: - Singleton
+
     static let shared = PersistenceController()
     private init() {}
 
     let networkController = NetworkController.shared
-
-    func fetchArticles() {
-        let articles = readArticles()
-        if articles.isEmpty {
-            networkController.fetchItems { [weak self] result in
-                guard let self = self else { fatalError() }
-
-                switch result {
-                case .success(let articles):
-                    self.sendArticlesToMainVC(articles)
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-            }
-        } else {
-            sendArticlesToMainVC(articles)
-        }
-    }
-
-    private func sendArticlesToMainVC(_ articles: [Article]) {
-        DispatchQueue.main.async {
-            guard
-                let splitViewController = UIStoryboard.main
-                    .instantiateViewController(
-                        withIdentifier: "SplitViewController"
-                    ) as? UISplitViewController,
-                let navigationController = splitViewController
-                    .viewControllers.first as? UINavigationController,
-                let mainTableViewController = navigationController
-                    .visibleViewController as? MainTableViewController
-            else { fatalError("Initialization issue") }
-            self.writeInRealm(articles)
-            mainTableViewController.articles = self.readArticles()
-            splitViewController.delegate = UIApplication.shared.delegate as? AppDelegate
-            UIApplication.shared.windows.first?.rootViewController = splitViewController
-        }
-    }
 
     func writeInRealm(_ articles: [Article]) {
         do {
@@ -87,7 +52,7 @@ final class PersistenceController {
         }
     }
 
-    private func readArticles() -> [Article] {
+    func readArticles() -> [Article] {
         var articles = [Article]()
         do {
             let realm = try Realm()

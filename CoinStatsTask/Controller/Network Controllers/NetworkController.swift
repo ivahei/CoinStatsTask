@@ -11,6 +11,8 @@ import Kingfisher
 
 final class NetworkController {
 
+    // MARK: - Singleton
+
     static let shared = NetworkController()
     private init() {}
 

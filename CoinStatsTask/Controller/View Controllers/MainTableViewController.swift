@@ -11,8 +11,6 @@ import RealmSwift
 
 final class MainTableViewController: UITableViewController {
 
-    // MARK: - Singleton
-
     let persistenceController = PersistenceController.shared
 
     var articles: [Article] = []
