@@ -12,6 +12,7 @@ import RealmSwift
 final class MainTableViewController: UITableViewController {
 
     let persistenceController = PersistenceController.shared
+    var notificationToken: NotificationToken?
 
     var articles: [Article] = []
 
@@ -22,7 +23,7 @@ final class MainTableViewController: UITableViewController {
 
         tableView.reloadData()
 
-        markIsReadIfDeviceIsIPad()
+        realmChangeListener()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -31,13 +32,30 @@ final class MainTableViewController: UITableViewController {
         tableView.reloadData()
     }
 
-    private func markIsReadIfDeviceIsIPad() {
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            let indexPath = IndexPath(row: 0, section: 0)
-            tableView.selectRow(at: indexPath, animated: false, scrollPosition: .top)
-            articles[indexPath.row].isRead = true
-            persistenceController.writeInRealm(articles)
-            showSplitViewDetails(for: indexPath)
+    private func realmChangeListener() {
+        do {
+            let realm = try Realm()
+            let results = realm.objects(ArticleRealm.self)
+            notificationToken = results.observe { [weak self] (changes: RealmCollectionChange) in
+                guard let tableView = self?.tableView else { return }
+                switch changes {
+                case .initial:
+                    tableView.reloadData()
+                case .update(_, let deletions, let insertions, let modifications):
+                    tableView.performBatchUpdates({
+                        tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}),
+                                             with: .automatic)
+                        tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),
+                                             with: .automatic)
+                        tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),
+                                             with: .automatic)
+                    })
+                case .error(let error):
+                    fatalError("\(error)")
+                }
+            }
+        } catch {
+            print(error.localizedDescription)
         }
     }
 }
@@ -60,12 +78,6 @@ extension MainTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         articles[indexPath.row].isRead = true
         persistenceController.writeInRealm(articles)
-
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            let currentIndexPath = IndexPath(row: indexPath.row, section: 0)
-            tableView.reloadRows(at: [currentIndexPath], with: .none)
-        }
-
         showSplitViewDetails(for: indexPath)
     }
 

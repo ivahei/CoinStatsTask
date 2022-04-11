@@ -24,14 +24,27 @@ class LaunchViewController: UIViewController {
         let articles = persistenceController.readArticles()
         networkController.fetchItems { [weak self] result in
             guard let self = self else { fatalError() }
-
+            if !articles.isEmpty {
+            self.sendArticlesToMainVC(articles)
+            }
             switch result {
             case .success(let articles):
-                self.sendArticlesToMainVC(articles)
-            case .failure(let error):
-                if !self.articles.isEmpty {
-                    self.sendArticlesToMainVC(articles)
+                self.persistenceController.writeInRealm(articles)
+                DispatchQueue.main.async {
+                    guard
+                        let splitViewController = UIStoryboard.main
+                            .instantiateViewController(
+                                withIdentifier: "SplitViewController"
+                            ) as? UISplitViewController,
+                        let navigationController = splitViewController
+                            .viewControllers.first as? UINavigationController,
+                        let mainTableViewController = navigationController
+                            .visibleViewController as? MainTableViewController
+                    else { fatalError("Initialization issue") }
+
+                    mainTableViewController.articles = self.persistenceController.readArticles()
                 }
+            case .failure(let error):
                 print(error.localizedDescription)
             }
         }
@@ -49,7 +62,7 @@ class LaunchViewController: UIViewController {
                 let mainTableViewController = navigationController
                     .visibleViewController as? MainTableViewController
             else { fatalError("Initialization issue") }
-            self.persistenceController.writeInRealm(articles)
+
             mainTableViewController.articles = self.persistenceController.readArticles()
             splitViewController.delegate = UIApplication.shared.delegate as? AppDelegate
             UIApplication.shared.windows.first?.rootViewController = splitViewController
