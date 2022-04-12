@@ -24,6 +24,7 @@ final class MainTableViewController: UITableViewController {
         tableView.reloadData()
 
         realmChangeListener()
+        markIsReadIfDeviceIsIPad()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -56,6 +57,15 @@ final class MainTableViewController: UITableViewController {
             }
         } catch {
             print(error.localizedDescription)
+        }
+    }
+
+    private func markIsReadIfDeviceIsIPad() {
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            let indexPath = IndexPath(row: 0, section: 0)
+            tableView.selectRow(at: indexPath, animated: false, scrollPosition: .top)
+            articles[indexPath.row].isRead = true
+            showSplitViewDetails(for: indexPath)
         }
     }
 }
