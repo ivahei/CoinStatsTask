@@ -46,8 +46,8 @@ final class PersistenceController {
 
                     if modify {
                         realm.add(articleRealm, update: .modified)
-                    } else {
-                        realm.add(articleRealm, update: .modified)
+                    } else if realm.object(ofType: ArticleRealm.self, forPrimaryKey: articleRealm.id) == nil {
+                        realm.add(articleRealm)
                     }
                 }
             }

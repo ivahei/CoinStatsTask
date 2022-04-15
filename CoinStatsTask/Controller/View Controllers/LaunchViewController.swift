@@ -43,6 +43,10 @@ class LaunchViewController: UIViewController {
 
                     self.persistenceController.writeInRealm(articles, modify: false)
                     mainTableViewController.articles = self.persistenceController.readArticles()
+                    if self.articles.isEmpty {
+                        splitViewController.delegate = UIApplication.shared.delegate as? AppDelegate
+                        UIApplication.shared.windows.first?.rootViewController = splitViewController
+                    }
                 }
             case .failure(let error):
                 print(error.localizedDescription)
